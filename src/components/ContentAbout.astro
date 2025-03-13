@@ -1,0 +1,100 @@
+---
+import { Code } from 'astro:components';
+
+const code = `interface Developer {
+    name: string;
+    skills: string[];
+    interests: string[];
+};
+
+interface TechStack {
+    mobile: string[];
+    frontend: string[];
+};
+
+type ContactType = 'github' | 'linkedIn' | 'email';
+
+const techStack: TechStack = {
+    frontend: [
+        'React',
+        'JavaScript',
+        'CSS',
+        'TypeScript',
+        'TailwindCSS',
+        'Astro',
+        'SCSS',
+        'NextJS',
+        'WordPress',
+    ],
+    mobile: [
+        'React Native',
+        'Flutter (in progress)',
+        'IOS (in progress)'
+    ]
+};
+
+// Developer profile
+const me: Developer = {
+    name: 'Ramiro Pacheco.',
+    skills: [
+        ...techStack.mobile,
+        ...techStack.frontend
+    ],
+    interests: [
+        'Open Source',
+        'Design',
+        'UX',
+        'UI',
+        'Performance',
+        'Responsive Design',
+        'Mobile'
+    ]
+};
+
+// Contact function
+const contact = (type: ContactType): string => {
+    switch (type) {
+        case 'github':
+            return 'https://github.com/ramipaleo';
+        case 'linkedIn':
+            return 'www.linkedin.com/in/ramiro-pacheco-03619054';
+        case 'email':
+            return 'raleo.0486@gmail.com';
+        default:
+            return 'Send an email.';
+    }
+};
+
+`;
+---
+
+<Code
+    code={code}
+    lang="js"
+    wrap={true}
+/>
+
+<style is:global>
+
+    /* Custom styling for code block line numbers */
+    pre.astro-code {
+        @apply bg-transparent !important;
+    }
+
+    pre.astro-code code {
+        @apply block;
+        counter-reset: step;
+        counter-increment: step 0;
+    }
+
+    pre.astro-code code .line {
+        @apply relative;
+    }
+
+    pre.astro-code code .line::before {
+        content: counter(step);
+        counter-increment: step;
+        @apply text-gray-600 pr-2;
+    }
+
+</style>
